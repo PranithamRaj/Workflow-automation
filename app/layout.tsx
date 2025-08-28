@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Montserrat } from "next/font/google"
 import { Open_Sans } from "next/font/google"
 import "./globals.css"
+import { CommandPalette } from "@/components/command-palette"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -31,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable} antialiased`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        <CommandPalette />
+      </body>
     </html>
   )
 }

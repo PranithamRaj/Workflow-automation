@@ -1,14 +1,10 @@
 "use client"
 
 import { CardContent } from "@/components/ui/card"
-
 import { CardDescription } from "@/components/ui/card"
-
 import { CardTitle } from "@/components/ui/card"
-
 import { CardHeader } from "@/components/ui/card"
-
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
@@ -18,6 +14,9 @@ import Link from "next/link"
 import { NotificationMenu } from "@/components/notification-menu"
 import { PopularCarousel } from "@/components/popular-carousel"
 import { ProfileSheet } from "@/components/profile-sheet"
+import { Reveal } from "@/components/reveal"
+import { TiltCard } from "@/components/tilt-card"
+import { AnimatedCounter } from "@/components/animated-counter"
 
 const sampleWorkflows = [
   {
@@ -53,9 +52,27 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [filteredWorkflows, setFilteredWorkflows] = useState(sampleWorkflows)
   const [isVisible, setIsVisible] = useState(false)
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     setIsVisible(true)
+  }, [])
+
+  useEffect(() => {
+    function isEditable(el: EventTarget | null) {
+      return (
+        (el instanceof HTMLElement && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable)) ||
+        false
+      )
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "/" && !isEditable(e.target)) {
+        e.preventDefault()
+        inputRef.current?.focus()
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
   }, [])
 
   useEffect(() => {
@@ -107,54 +124,60 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
-          <div className={`transition-all duration-1000 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-            <h1 className="font-montserrat font-black text-4xl md:text-6xl lg:text-7xl mb-6 text-foreground">
-              Automate Your
-              <span className="text-primary block animate-float">Workflows</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              Discover, share, and create powerful automation workflows with n8n. Join thousands of professionals
-              streamlining their work processes.
-            </p>
-          </div>
-
-          {/* Search Bar */}
-          <div
-            className={`max-w-2xl mx-auto mb-12 transition-all duration-1000 delay-300 ${isVisible ? "animate-slide-in-right" : "opacity-0"}`}
-          >
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-              <Input
-                type="text"
-                placeholder="Search workflows, automations, or use cases..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-6 text-lg rounded-xl border-2 focus:border-primary transition-all-smooth hover-lift"
-              />
+          <Reveal>
+            <div className={`transition-all duration-1000 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+              <h1 className="font-montserrat font-black text-4xl md:text-6xl lg:text-7xl mb-6 text-foreground">
+                Automate Your
+                <span className="text-primary block animate-float">Workflows</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+                Discover, share, and create powerful automation workflows with n8n. Join thousands of professionals
+                streamlining their work processes.
+              </p>
             </div>
-          </div>
-
-          <div
-            className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-500 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
-          >
-            <Button size="lg" className="text-lg px-8 py-6 transition-all-smooth hover-lift" asChild>
-              <Link href="/automate">
-                <Play className="w-5 h-5 mr-2" />
-                Start Automating
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-6 transition-all-smooth hover-lift bg-transparent"
-              asChild
+          </Reveal>
+          {/* Search Bar */}
+          <Reveal delayMs={100}>
+            <div
+              className={`max-w-2xl mx-auto mb-12 transition-all duration-1000 delay-300 ${isVisible ? "animate-slide-in-right" : "opacity-0"}`}
             >
-              <Link href="/community">
-                <Users className="w-5 h-5 mr-2" />
-                Join Community
-              </Link>
-            </Button>
-          </div>
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                <Input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Search workflows, automations, or use cases..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 pr-4 py-6 text-lg rounded-xl border-2 focus:border-primary transition-all-smooth hover-lift"
+                  aria-label="Search workflows"
+                />
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delayMs={200}>
+            <div
+              className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-500 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            >
+              <Button size="lg" className="text-lg px-8 py-6 transition-all-smooth hover-lift" asChild>
+                <Link href="/automate">
+                  <Play className="w-5 h-5 mr-2" />
+                  Start Automating
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-lg px-8 py-6 transition-all-smooth hover-lift bg-transparent"
+                asChild
+              >
+                <Link href="/community">
+                  <Users className="w-5 h-5 mr-2" />
+                  Join Community
+                </Link>
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -193,20 +216,46 @@ export default function HomePage() {
                 description: "Access premium integrations and advanced workflow management tools",
               },
             ].map((feature, index) => (
-              <Card
-                key={index}
-                className={`text-center transition-all-smooth hover-lift animate-fade-in-up`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                    {feature.icon}
-                  </div>
-                  <CardTitle className="font-montserrat font-bold">{feature.title}</CardTitle>
-                  <CardDescription className="text-base">{feature.description}</CardDescription>
-                </CardHeader>
-              </Card>
+              <Reveal key={feature.title} delayMs={index * 120}>
+                <TiltCard className="h-full">
+                  <Card className="h-full text-center transition-all-smooth hover-lift animate-fade-in-up">
+                    <CardHeader>
+                      <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                        {feature.icon}
+                      </div>
+                      <CardTitle className="font-montserrat font-bold">{feature.title}</CardTitle>
+                      <CardDescription className="text-base">{feature.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                </TiltCard>
+              </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NEW: Stats Section with Animated Counters */}
+      <section className="py-12 px-4 bg-card/50">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 gap-8 text-center sm:grid-cols-3">
+            <Reveal as="div" delayMs={0}>
+              <div>
+                <AnimatedCounter end={2400} suffix="+" className="text-4xl font-extrabold text-primary" />
+                <p className="mt-1 text-sm text-muted-foreground">Workflows Published</p>
+              </div>
+            </Reveal>
+            <Reveal as="div" delayMs={120}>
+              <div>
+                <AnimatedCounter end={12300} suffix="+" className="text-4xl font-extrabold text-primary" />
+                <p className="mt-1 text-sm text-muted-foreground">Active Users</p>
+              </div>
+            </Reveal>
+            <Reveal as="div" delayMs={240}>
+              <div>
+                <AnimatedCounter end={200} suffix="+" className="text-4xl font-extrabold text-primary" />
+                <p className="mt-1 text-sm text-muted-foreground">Integrations</p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
