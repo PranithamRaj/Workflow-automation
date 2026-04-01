@@ -43,11 +43,11 @@ export function CommandPalette() {
   return (
     <>
       {/* Launcher Button */}
-      <button
+        <button
         type="button"
         aria-label="Open command palette"
         onClick={() => setOpen(true)}
-        className="fixed bottom-4 right-4 z-40 rounded-full bg-primary text-primary-foreground px-4 py-2 shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+        className="fixed bottom-4 right-4 z-40 rounded-full bg-card border border-border/60 text-muted-foreground px-4 py-2 shadow-lg hover:border-primary/40 hover:text-primary transition-all-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary text-xs font-medium tracking-wide"
       >
         Search ⌘K
       </button>
@@ -62,7 +62,7 @@ export function CommandPalette() {
           onClick={() => setOpen(false)}
         >
           <div
-            className="mx-4 w-full max-w-lg rounded-lg border border-border bg-background p-3 shadow-xl"
+            className="mx-4 w-full max-w-lg rounded-xl border border-border/50 bg-popover/80 backdrop-blur-xl p-3 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <input
@@ -70,7 +70,7 @@ export function CommandPalette() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Type a command, e.g. 'Automate'..."
-              className="w-full rounded-md border px-3 py-2 text-sm outline-none focus:border-primary"
+              className="w-full rounded-lg border border-border/60 bg-background/50 px-3 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
             />
 
             <ul className="mt-3 max-h-64 overflow-auto divide-y">

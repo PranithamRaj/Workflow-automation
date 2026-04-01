@@ -18,7 +18,7 @@ export function PopularCarousel({ workflows }: { workflows: Workflow[] }) {
     <div className="relative">
       <div className="flex items-center justify-between mb-4">
         <div className="text-left">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-1">Popular Workflows</h2>
+          <h2 className="font-heading font-bold text-3xl md:text-4xl mb-1">Popular Workflows</h2>
           <p className="text-lg text-muted-foreground">Trending templates from the community</p>
         </div>
         <div className="hidden md:flex gap-2">

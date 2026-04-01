@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Search, Zap, Users, MessageCircle, Play, Settings, Database, Mail, Calendar } from "lucide-react"
+import { Search, Zap, Users, MessageCircle, Play, Settings, FileText, BarChart2, UserPlus } from "lucide-react"
 import Link from "next/link"
 import { NotificationMenu } from "@/components/notification-menu"
 import { PopularCarousel } from "@/components/popular-carousel"
@@ -20,31 +20,40 @@ import { AnimatedCounter } from "@/components/animated-counter"
 
 const sampleWorkflows = [
   {
-    id: 1,
-    title: "Email to Slack Notification",
-    description: "Automatically send Slack notifications when important emails arrive",
-    category: "Communication",
-    steps: 3,
-    icon: <Mail className="w-6 h-6" />,
-    tags: ["Email", "Slack", "Notifications"],
-  },
-  {
     id: 2,
-    title: "Database Backup Automation",
-    description: "Schedule daily database backups and store them in cloud storage",
-    category: "Data Management",
-    steps: 5,
-    icon: <Database className="w-6 h-6" />,
-    tags: ["Database", "Backup", "Cloud"],
+    title: "New Hire Onboarding Tracker",
+    description: "HR submits a form and the workflow instantly creates a Drive folder, schedules a check-in, and sends the new hire a welcome email.",
+    category: "HR & Onboarding",
+    steps: 4,
+    icon: <UserPlus className="w-6 h-6" />,
+    tags: ["Google Forms", "Google Drive", "Google Calendar", "Gmail"],
+    author: "WorkflowHub",
+    duration: "~4 min setup",
+    popularity: 2310,
   },
   {
     id: 3,
-    title: "Calendar Event Sync",
-    description: "Sync events between Google Calendar and project management tools",
-    category: "Productivity",
+    title: "IT Helpdesk Router",
+    description: "Logs hardware and software requests from a Google Form into a master sheet and pings the IT-Support chat instantly.",
+    category: "IT & Operations",
+    steps: 3,
+    icon: <FileText className="w-6 h-6" />,
+    tags: ["Google Forms", "Google Sheets", "Google Chat"],
+    author: "WorkflowHub",
+    duration: "~3 min setup",
+    popularity: 1205,
+  },
+  {
+    id: 4,
+    title: "End-of-Day Summary",
+    description: "Reads the day's data from a Google Sheet at 5 PM, formats it into a concise summary, and emails it to the manager.",
+    category: "Reporting",
     steps: 4,
-    icon: <Calendar className="w-6 h-6" />,
-    tags: ["Calendar", "Sync", "Productivity"],
+    icon: <BarChart2 className="w-6 h-6" />,
+    tags: ["Google Sheets", "AI", "Gmail"],
+    author: "WorkflowHub",
+    duration: "~4 min setup",
+    popularity: 978,
   },
 ]
 
@@ -88,33 +97,33 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between px-4">
           <div className="flex items-center space-x-2">
             <div className="flex items-center justify-center w-8 h-8 bg-primary rounded-lg animate-pulse-glow">
               <Zap className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="font-montserrat font-black text-xl text-primary">WorkflowHub</span>
+            <span className="font-heading font-extrabold text-xl text-primary tracking-tight">WorkflowHub</span>
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Home
             </Link>
-            <Link href="/automate" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link href="/automate" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Start Automating
             </Link>
-            <Link href="/automate#workflows" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link href="/automate#workflows" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Workflows
             </Link>
-            <Link href="/community" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link href="/community" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Community
             </Link>
             <NotificationMenu />
-            <Button asChild variant="outline" size="sm" className="transition-all-smooth hover-lift bg-transparent">
+            <Button asChild variant="outline" size="sm" className="transition-all-smooth hover-lift bg-transparent border-border/60">
               <Link href="/profile">Profile</Link>
             </Button>
-            <Button size="sm" className="transition-all-smooth hover-lift">
+            <Button size="sm" className="transition-all-smooth hover-lift animate-pulse-glow">
               Sign In
             </Button>
           </nav>
@@ -122,34 +131,37 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
+      <section className="relative py-28 md:py-36 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-dot-grid opacity-30" />
+        <div className="absolute top-[-15%] left-[10%] w-[500px] h-[500px] rounded-full bg-primary/[0.06] blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[8%] w-[420px] h-[420px] rounded-full bg-accent/[0.04] blur-[120px]" />
+
+        <div className="container mx-auto text-center relative z-10">
           <Reveal>
             <div className={`transition-all duration-1000 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-              <h1 className="font-montserrat font-black text-4xl md:text-6xl lg:text-7xl mb-6 text-foreground">
+              <h1 className="font-heading font-extrabold text-5xl md:text-7xl lg:text-8xl mb-6 tracking-tight">
                 Automate Your
-                <span className="text-primary block animate-float">Workflows</span>
+                <span className="text-gradient block animate-float">Workflows</span>
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed font-light">
                 Discover, share, and create powerful automation workflows with n8n. Join thousands of professionals
                 streamlining their work processes.
               </p>
             </div>
           </Reveal>
-          {/* Search Bar */}
           <Reveal delayMs={100}>
             <div
               className={`max-w-2xl mx-auto mb-12 transition-all duration-1000 delay-300 ${isVisible ? "animate-slide-in-right" : "opacity-0"}`}
             >
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+              <div className="relative group">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5 group-focus-within:text-primary transition-colors" />
                 <Input
                   ref={inputRef}
                   type="text"
                   placeholder="Search workflows, automations, or use cases..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-4 py-6 text-lg rounded-xl border-2 focus:border-primary transition-all-smooth hover-lift"
+                  className="pl-12 pr-4 py-6 text-lg rounded-xl border border-border/60 bg-card/40 backdrop-blur-sm focus:border-primary/60 focus:shadow-[0_0_24px_oklch(0.77_0.152_192/0.1)] transition-all-smooth"
                   aria-label="Search workflows"
                 />
               </div>
@@ -168,7 +180,7 @@ export default function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="text-lg px-8 py-6 transition-all-smooth hover-lift bg-transparent"
+                className="text-lg px-8 py-6 transition-all-smooth hover-lift bg-transparent border-border/60"
                 asChild
               >
                 <Link href="/community">
@@ -182,17 +194,18 @@ export default function HomePage() {
       </section>
 
       {/* Featured Workflows */}
-      <section id="workflows" className="py-16 px-4 bg-card/50">
-        <div className="container mx-auto">
+      <section id="workflows" className="relative py-20 px-4">
+        <div className="absolute inset-0 bg-card/30" />
+        <div className="container mx-auto relative z-10">
           <PopularCarousel workflows={filteredWorkflows as any} />
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-4">
+      <section id="features" className="py-20 px-4">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">Why Choose WorkflowHub?</h2>
+          <div className="text-center mb-14">
+            <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">Why Choose WorkflowHub?</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Everything you need to build, share, and manage your automation workflows
             </p>
@@ -218,12 +231,12 @@ export default function HomePage() {
             ].map((feature, index) => (
               <Reveal key={feature.title} delayMs={index * 120}>
                 <TiltCard className="h-full">
-                  <Card className="h-full text-center transition-all-smooth hover-lift animate-fade-in-up">
+                  <Card className="h-full text-center transition-all-smooth hover-lift hover:border-primary/30 animate-fade-in-up border-border/60">
                     <CardHeader>
-                      <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                      <div className="mx-auto w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-4">
                         {feature.icon}
                       </div>
-                      <CardTitle className="font-montserrat font-bold">{feature.title}</CardTitle>
+                      <CardTitle className="font-heading font-bold">{feature.title}</CardTitle>
                       <CardDescription className="text-base">{feature.description}</CardDescription>
                     </CardHeader>
                   </Card>
@@ -234,10 +247,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEW: Stats Section with Animated Counters */}
-      <section className="py-12 px-4 bg-card/50">
+      {/* Stats Section */}
+      <section className="py-16 px-4 border-y border-border/40">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 gap-8 text-center sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 text-center sm:grid-cols-3 sm:divide-x sm:divide-border/40">
             <Reveal as="div" delayMs={0}>
               <div>
                 <AnimatedCounter end={2400} suffix="+" className="text-4xl font-extrabold text-primary" />
@@ -261,19 +274,19 @@ export default function HomePage() {
       </section>
 
       {/* Community Section */}
-      <section id="community" className="py-16 px-4 bg-card/50">
+      <section id="community" className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">Join Our Community</h2>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">Join Our Community</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Connect with automation enthusiasts, share your workflows, and get help from experts
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="transition-all-smooth hover-lift">
+            <Card className="transition-all-smooth hover-lift border-border/60 hover:border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center font-montserrat font-bold">
+                <CardTitle className="flex items-center font-heading font-bold">
                   <MessageCircle className="w-6 h-6 mr-3 text-primary" />
                   Discussion Forum
                 </CardTitle>
@@ -310,9 +323,9 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="transition-all-smooth hover-lift">
+            <Card className="transition-all-smooth hover-lift border-border/60 hover:border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center font-montserrat font-bold">
+                <CardTitle className="flex items-center font-heading font-bold">
                   <Users className="w-6 h-6 mr-3 text-primary" />
                   User Profiles
                 </CardTitle>
@@ -353,10 +366,13 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="font-montserrat font-black text-3xl md:text-5xl mb-6">Ready to Automate?</h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+      <section className="relative py-24 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-dot-grid opacity-20" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-primary/[0.05] blur-[140px]" />
+
+        <div className="container mx-auto text-center relative z-10">
+          <h2 className="font-heading font-extrabold text-3xl md:text-5xl mb-6 tracking-tight">Ready to Automate?</h2>
+          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto font-light">
             Join thousands of professionals who have streamlined their workflows with WorkflowHub
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -366,7 +382,7 @@ export default function HomePage() {
             <Button
               variant="outline"
               size="lg"
-              className="text-lg px-8 py-6 transition-all-smooth hover-lift bg-transparent"
+              className="text-lg px-8 py-6 transition-all-smooth hover-lift bg-transparent border-border/60"
               asChild
             >
               <Link href="/pricing">View Pricing</Link>
@@ -376,7 +392,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t py-12 px-4">
+      <footer className="border-t border-border/40 py-12 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -384,13 +400,13 @@ export default function HomePage() {
                 <div className="flex items-center justify-center w-8 h-8 bg-primary rounded-lg">
                   <Zap className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="font-montserrat font-black text-xl text-primary">WorkflowHub</span>
+                <span className="font-heading font-extrabold text-xl text-primary tracking-tight">WorkflowHub</span>
               </div>
               <p className="text-muted-foreground">Empowering professionals with intelligent workflow automation.</p>
             </div>
 
             <div>
-              <h3 className="font-montserrat font-bold mb-4">Product</h3>
+              <h3 className="font-heading font-bold mb-4">Product</h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li>
                   <Link href="#" className="hover:text-primary transition-colors">
@@ -416,7 +432,7 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h3 className="font-montserrat font-bold mb-4">Community</h3>
+              <h3 className="font-heading font-bold mb-4">Community</h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li>
                   <Link href="#" className="hover:text-primary transition-colors">
@@ -442,7 +458,7 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h3 className="font-montserrat font-bold mb-4">Support</h3>
+              <h3 className="font-heading font-bold mb-4">Support</h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li>
                   <Link href="#" className="hover:text-primary transition-colors">
@@ -468,8 +484,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 WorkflowHub. All rights reserved.</p>
+          <div className="border-t border-border/40 mt-8 pt-8 text-center text-muted-foreground">
+            <p>&copy; 2026 WorkflowHub. All rights reserved.</p>
           </div>
         </div>
       </footer>

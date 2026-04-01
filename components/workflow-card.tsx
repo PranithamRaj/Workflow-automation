@@ -36,7 +36,7 @@ export function WorkflowCard({ workflow, onViewDetails, index }: WorkflowCardPro
 
   return (
     <Card
-      className="group transition-all-smooth hover-lift cursor-pointer border-2 hover:border-primary/50 animate-fade-in-up"
+      className="group transition-all-smooth hover-lift cursor-pointer border border-border/60 hover:border-primary/40 hover:shadow-[0_0_28px_oklch(0.77_0.152_192/0.07)] animate-fade-in-up"
       style={{ animationDelay: index != null ? `${index * 0.1}s` : undefined }}
     >
       <CardHeader>
@@ -52,7 +52,7 @@ export function WorkflowCard({ workflow, onViewDetails, index }: WorkflowCardPro
             <span>{workflow.steps} steps</span>
           </div>
         </div>
-        <CardTitle className="font-montserrat font-bold group-hover:text-primary transition-colors">
+        <CardTitle className="font-heading font-bold group-hover:text-primary transition-colors">
           {workflow.title}
         </CardTitle>
         <CardDescription className="text-base">{workflow.description}</CardDescription>

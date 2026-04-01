@@ -15,8 +15,8 @@ const categories = [
 export default function CommunityPage() {
   return (
     <main className="container py-10 px-4">
-      <header className="text-center mb-10">
-        <h1 className="font-montserrat font-black text-3xl md:text-4xl">Community</h1>
+      <header className="text-center mb-12">
+        <h1 className="font-heading font-extrabold text-3xl md:text-5xl tracking-tight">Community</h1>
         <p className="text-muted-foreground">Join groups, ask questions, and connect via voice channels.</p>
       </header>
 
@@ -24,11 +24,11 @@ export default function CommunityPage() {
         {categories.map((c, i) => (
           <Card
             key={c.slug}
-            className="transition-all-smooth hover-lift animate-fade-in-up"
+            className="transition-all-smooth hover-lift hover:border-primary/30 border-border/60 animate-fade-in-up"
             style={{ animationDelay: `${i * 0.08}s` }}
           >
             <CardHeader>
-              <CardTitle className="font-montserrat font-bold flex items-center">
+              <CardTitle className="font-heading font-bold flex items-center">
                 <Users className="w-5 h-5 mr-2 text-primary" />
                 {c.name}
               </CardTitle>

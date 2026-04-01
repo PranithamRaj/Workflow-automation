@@ -20,7 +20,7 @@ export function ProfileSheet({ triggerClassName = "" }: { triggerClassName?: str
       </SheetTrigger>
       <SheetContent side="right" className="w-full sm:max-w-md">
         <SheetHeader>
-          <SheetTitle className="font-montserrat font-bold">Your Profile</SheetTitle>
+          <SheetTitle className="font-heading font-bold">Your Profile</SheetTitle>
         </SheetHeader>
         <div className="mt-4 space-y-4">
           <div className="rounded-lg border p-4 bg-card animate-fade-in-up">

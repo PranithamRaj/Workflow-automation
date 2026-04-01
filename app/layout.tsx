@@ -1,22 +1,23 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Montserrat } from "next/font/google"
-import { Open_Sans } from "next/font/google"
+import { Syne } from "next/font/google"
+import { Outfit } from "next/font/google"
 import "./globals.css"
 import { CommandPalette } from "@/components/command-palette"
+import { Toaster } from "sonner"
 
-const montserrat = Montserrat({
+const syne = Syne({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-montserrat",
-  weight: ["400", "600", "700", "900"],
+  variable: "--font-syne",
+  weight: ["400", "600", "700", "800"],
 })
 
-const openSans = Open_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-open-sans",
-  weight: ["400", "500", "600"],
+  variable: "--font-outfit",
+  weight: ["300", "400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -31,10 +32,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${openSans.variable} antialiased`}>
-      <body className="font-sans">
+    <html lang="en" className={`${syne.variable} ${outfit.variable} antialiased`}>
+      <body>
         {children}
         <CommandPalette />
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   )

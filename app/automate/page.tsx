@@ -4,36 +4,42 @@ import { useMemo, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Mail, Database, Calendar, Filter } from "lucide-react"
+import { UserPlus, FileText, BarChart2, Filter } from "lucide-react"
 import { WorkflowCard, type Workflow } from "@/components/workflow-card"
 
 const workflows: Workflow[] = [
   {
-    id: 1,
-    title: "Email to Slack Notification",
-    description: "Automatically send Slack notifications when important emails arrive",
-    category: "Communication",
-    steps: 3,
-    icon: <Mail className="w-6 h-6" />,
-    tags: ["Email", "Slack", "Notifications"],
-  },
-  {
     id: 2,
-    title: "Database Backup Automation",
-    description: "Schedule daily database backups and store them in cloud storage",
-    category: "Data Management",
-    steps: 5,
-    icon: <Database className="w-6 h-6" />,
-    tags: ["Database", "Backup", "Cloud"],
+    title: "New Hire Onboarding Tracker",
+    description: "HR submits a form and the workflow instantly creates a Drive folder, schedules a check-in, and sends a welcome email.",
+    category: "HR & Onboarding",
+    steps: 4,
+    icon: <UserPlus className="w-6 h-6" />,
+    tags: ["Google Forms", "Google Drive", "Google Calendar", "Gmail"],
+    author: "WorkflowHub",
+    popularity: 2310,
   },
   {
     id: 3,
-    title: "Calendar Event Sync",
-    description: "Sync events between Google Calendar and project management tools",
-    category: "Productivity",
+    title: "IT Helpdesk Router",
+    description: "Logs hardware and software requests from a Google Form into a master sheet and pings the IT-Support chat instantly.",
+    category: "IT & Operations",
+    steps: 3,
+    icon: <FileText className="w-6 h-6" />,
+    tags: ["Google Forms", "Google Sheets", "Google Chat"],
+    author: "WorkflowHub",
+    popularity: 1205,
+  },
+  {
+    id: 4,
+    title: "End-of-Day Summary",
+    description: "Reads the day's data from a Google Sheet at 5 PM, formats it into a concise summary, and emails it to the manager.",
+    category: "Reporting",
     steps: 4,
-    icon: <Calendar className="w-6 h-6" />,
-    tags: ["Calendar", "Sync", "Productivity"],
+    icon: <BarChart2 className="w-6 h-6" />,
+    tags: ["Google Sheets", "AI", "Gmail"],
+    author: "WorkflowHub",
+    popularity: 978,
   },
 ]
 
@@ -76,7 +82,7 @@ export default function AutomatePage() {
     <main className="container py-10 px-4">
       <header className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="font-montserrat font-black text-3xl md:text-4xl">Start Automating</h1>
+          <h1 className="font-heading font-extrabold text-3xl md:text-5xl tracking-tight">Start Automating</h1>
           <p className="text-muted-foreground">Search use cases, filter by tags, and preview workflows.</p>
         </div>
         <Button variant="outline" className="transition-all-smooth hover-lift bg-transparent">
@@ -123,7 +129,7 @@ export default function AutomatePage() {
       {recommended.length > 0 && (
         <section className="mt-10">
           <header className="mb-4">
-            <h2 className="font-montserrat font-bold text-2xl">Recommended for you</h2>
+            <h2 className="font-heading font-bold text-2xl">Recommended for you</h2>
             <p className="text-muted-foreground text-sm">Suggestions based on your current filters and browsing.</p>
           </header>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

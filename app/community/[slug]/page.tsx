@@ -105,7 +105,7 @@ export default function CommunityCategoryPage() {
       <header className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="font-montserrat font-black text-3xl md:text-4xl animate-fade-in-up">{cat.name}</h1>
+            <h1 className="font-heading font-extrabold text-3xl md:text-4xl tracking-tight animate-fade-in-up">{cat.name}</h1>
             <p className="text-muted-foreground">
               <span className="inline-flex items-center">
                 <Users className="w-4 h-4 mr-1 text-primary" /> {cat.members} members • {cat.online} online
@@ -137,7 +137,7 @@ export default function CommunityCategoryPage() {
               style={{ animationDelay: `${i * 0.08}s` }}
             >
               <CardHeader>
-                <CardTitle className="font-montserrat font-bold">{m.name}</CardTitle>
+                <CardTitle className="font-heading font-bold">{m.name}</CardTitle>
                 <CardDescription>{m.speciality}</CardDescription>
               </CardHeader>
               <CardContent>
@@ -155,7 +155,7 @@ export default function CommunityCategoryPage() {
           <div className="lg:col-span-2 space-y-4">
             <Card className="animate-fade-in-up">
               <CardHeader>
-                <CardTitle className="font-montserrat font-bold">Start a discussion</CardTitle>
+                <CardTitle className="font-heading font-bold">Start a discussion</CardTitle>
                 <CardDescription>Ask questions or share insights with the community.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -186,7 +186,7 @@ export default function CommunityCategoryPage() {
                 style={{ animationDelay: `${i * 0.06}s` }}
               >
                 <CardHeader>
-                  <CardTitle className="font-montserrat font-bold">{p.title}</CardTitle>
+                  <CardTitle className="font-heading font-bold">{p.title}</CardTitle>
                   <CardDescription>by {p.author}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -220,7 +220,7 @@ export default function CommunityCategoryPage() {
           <aside className="space-y-4">
             <Card className="animate-fade-in-up">
               <CardHeader>
-                <CardTitle className="font-montserrat font-bold">Guidelines</CardTitle>
+                <CardTitle className="font-heading font-bold">Guidelines</CardTitle>
                 <CardDescription>Keep it friendly and constructive.</CardDescription>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground space-y-2">
@@ -244,7 +244,7 @@ export default function CommunityCategoryPage() {
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <CardHeader>
-                  <CardTitle className="font-montserrat font-bold flex items-center">
+                  <CardTitle className="font-heading font-bold flex items-center">
                     <Mic className="w-5 h-5 mr-2 text-primary" />
                     {room.name}
                   </CardTitle>

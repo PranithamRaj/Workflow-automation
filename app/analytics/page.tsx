@@ -17,14 +17,14 @@ export default function AnalyticsPage() {
   return (
     <main className="container py-10 px-4">
       <header className="mb-8">
-        <h1 className="font-montserrat font-black text-3xl md:text-4xl">Analytics</h1>
+        <h1 className="font-heading font-extrabold text-3xl md:text-5xl tracking-tight">Analytics</h1>
         <p className="text-muted-foreground">Track usage stats and engagement.</p>
       </header>
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className="font-montserrat font-bold">Workflows Completed</CardTitle>
+            <CardTitle className="font-heading font-bold">Workflows Completed</CardTitle>
             <CardDescription>Weekly completion trends</CardDescription>
           </CardHeader>
           <CardContent style={{ height: 260 }}>
@@ -42,7 +42,7 @@ export default function AnalyticsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="font-montserrat font-bold">Downloads</CardTitle>
+            <CardTitle className="font-heading font-bold">Downloads</CardTitle>
             <CardDescription>Weekly downloads trends</CardDescription>
           </CardHeader>
           <CardContent style={{ height: 260 }}>
