@@ -72,7 +72,8 @@ export default function WorkflowDetailsPage() {
 
     setActivating(true)
     try {
-      const res = await fetch(action.url, { method: "POST" })
+      const method = action.type === "webhook" ? (action.method ?? "POST") : "POST"
+      const res = await fetch(action.url, { method })
       if (!res.ok) throw new Error(`Status ${res.status}`)
       toast.success("Workflow activated successfully!")
     } catch {
