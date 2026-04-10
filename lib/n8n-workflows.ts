@@ -1,6 +1,6 @@
 type WorkflowAction =
   | { type: "form"; url: string; label: string }
-  | { type: "webhook"; url: string; label: string }
+  | { type: "webhook"; url: string; label: string; method?: "GET" | "POST" }
 
 export const WORKFLOW_ACTIONS: Record<number, WorkflowAction> = {
   2: {
@@ -15,7 +15,8 @@ export const WORKFLOW_ACTIONS: Record<number, WorkflowAction> = {
   },
   4: {
     type: "webhook",
-    url: "https://sumerian0.app.n8n.cloud/webhook/cc7ea8b0-0e1b-41ec-8795-c50c0a1fbc0c",
+    url: "https://sumerian0.app.n8n.cloud/webhook-test/cc7ea8b0-0e1b-41ec-8795-c50c0a1fbc0c",
     label: "Activate Workflow",
+    method: "GET",
   },
 }
